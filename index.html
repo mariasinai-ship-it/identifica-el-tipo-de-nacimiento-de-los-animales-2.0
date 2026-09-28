@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoowonder: El Secreto del Huevo Dorado</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4ade80">
+  <link rel="icon" type="image/png" href="icon-192.png">
+
+  <!-- Estilos visuales atractivos e interactivos para niños -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2b580c;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .app-icon {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 20px;
+      margin: 10px auto 20px auto;
+      display: block;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn-oviparo {
+      background-color: #ff9f43;
+    }
+
+    .btn-viviparo {
+      background-color: #54a0ff;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      min-height: 28px;
+      color: #2e86de;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <h1>Zoowonder 🐾</h1>
+    <p class="subtitle">¿Cómo nace este animalito?</p>
+
+    <!-- Imagen principal del juego -->
+    <img src="icon-512.jpg" alt="Aprende de Animales" class="app-icon">
+
+    <div class="buttons-container">
+      <button class="btn btn-oviparo" onclick="responder('oviparo')">🥚 Ovíparo (Huevo)</button>
+      <button class="btn btn-viviparo" onclick="responder('viviparo')">🐘 Vivíparo (Mamífero)</button>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  </main>
+
+  <!-- Lógica interactiva del juego -->
+  <script>
+    function responder(tipo) {
+      const feedback = document.getElementById('feedback');
+      if (tipo === 'oviparo') {
+        feedback.style.color = '#e67e22';
+        feedback.textContent = '¡Correcto! Los ovíparos nacen de un huevo 🥚🐣';
+      } else if (tipo === 'viviparo') {
+        feedback.style.color = '#2980b9';
+        feedback.textContent = '¡Muy bien! Los vivíparos nacen del vientre de mamá 🐘🍼';
+      }
+    }
+
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registrado:', reg.scope))
+          .catch(err => console.error('Error en Service Worker:', err));
+      });
+    }
+  </script>
+</body>
+</html>
